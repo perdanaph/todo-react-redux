@@ -1,4 +1,3 @@
-import './../css/styleTodoItem.css';
 import { MdDeleteForever } from 'react-icons/md';
 import { RiPencilFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
