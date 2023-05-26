@@ -10,3 +10,15 @@ main {
   height: 100vh;
   justify-content: center;
 }
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .todo {
+    width: 90%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1030px) {
+  .todo {
+    width: 60%;
+  }
+}

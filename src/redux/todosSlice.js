@@ -5,18 +5,13 @@ export const todosSlice = createSlice({
   initialState: {
     todos: [
       {
-        id: 1,
+        id: Math.random().toString(16).slice(2),
         todo: 'Learn React',
         completed: true,
       },
       {
-        id: 2,
+        id: Math.random().toString(16).slice(2),
         todo: 'Learn Redux',
-        completed: true,
-      },
-      {
-        id: 3,
-        todo: 'Learn Docker',
         completed: false,
       },
     ],

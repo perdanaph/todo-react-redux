@@ -31,7 +31,7 @@ export default function NavigationTodo() {
   };
 
   return (
-    <nav className="nav-todo w-full m-12">
+    <nav className="nav-todo w-full my-12">
       <ul className="flex list-none gap-4">
         {selectFilter.map(item => (
           <li key={item.id}>

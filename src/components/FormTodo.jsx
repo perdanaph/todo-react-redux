@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo, updateTodo } from './../redux/todosSlice';
@@ -8,7 +7,7 @@ export default function FormTodo(props) {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
   const handleSubmit = e => {
-    e.preventDefault(e);
+    e.preventDefault();
     value != '' &&
       (dispatch(
         addTodo({
@@ -19,7 +18,7 @@ export default function FormTodo(props) {
   };
 
   const handleUpdate = e => {
-    e.preventDefault(e);
+    e.preventDefault();
     value != '' &&
       (dispatch(
         updateTodo({
@@ -27,8 +26,8 @@ export default function FormTodo(props) {
           todo: value,
         })
       ),
-      setValue(''),
-      done());
+      setValue(''));
+    done();
   };
 
   useEffect(() => {
