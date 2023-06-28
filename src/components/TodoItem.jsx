@@ -1,13 +1,22 @@
+/* eslint-disable react/prop-types */
 import { MdDeleteForever } from 'react-icons/md';
 import { RiPencilFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { compledeTodo, deleteTodo } from './../redux/todosSlice';
+import { compledeTodo, deleteTodo, fetchTodo } from './../redux/todosSlice';
+import { useEffect } from 'react';
 
 export default function TodoItem(props) {
   const { getTodo } = props;
+  const dispatch = useDispatch();
   const todos = useSelector(state => state.todos.todos);
   const filterBy = useSelector(state => state.todos.filterBy);
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodo());
+  }, []);
+
+  console.log(todos);
+
   const handleCheckbox = id =>
     dispatch(
       compledeTodo({
