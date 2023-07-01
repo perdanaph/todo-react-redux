@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo, updateTodo } from './../redux/todosSlice';
@@ -6,12 +7,14 @@ export default function FormTodo(props) {
   const { id, todoUpdate, isUpdate, done } = props;
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     value != '' &&
-      (dispatch(
+      (await dispatch(
         addTodo({
+          id: Math.random().toString(16).slice(2),
           todo: value,
+          completed: false,
         })
       ),
       setValue(''));

@@ -1,30 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-let data = JSON.parse(localStorage.getItem('todos'));
-if (data == null) {
-  data = [];
-}
+const getInitialTodo = () => {
+  const localTodoList = window.localStorage.getItem('todos');
+
+  if (localTodoList) {
+    return JSON.parse(localTodoList);
+  }
+
+  window.localStorage.setItem('todos', []);
+  return [];
+};
+
 export const todosSlice = createSlice({
   name: 'todos',
   initialState: {
-    todos: [],
+    todos: getInitialTodo(),
     filterBy: 'ALL',
   },
 
   reducers: {
-    fetchTodo: state => {
-      state.todos = JSON.parse(localStorage.getItem('todos'));
-      state.filterBy = 'ALL';
-    },
     addTodo: (state, action) => {
-      const newTodo = {
-        id: Math.random().toString(16).slice(2),
-        todo: action.payload.todo,
-        completed: false,
-      };
-      const item = JSON.stringify([...state.todos, newTodo]);
-      localStorage.setItem('todos', item);
-      state.todos = [...state.todos, newTodo];
+      state.todos.push(action.payload);
+      const todoList = window.localStorage.getItem('todos');
+      if (todoList) {
+        const todoListArray = JSON.parse(todoList);
+        todoListArray.push({ ...action.payload });
+        window.localStorage.setItem('todos', JSON.stringify(todoListArray));
+      } else {
+        window.localStorage.setItem(
+          'todos',
+          JSON.stringify([{ ...action.payload }])
+        );
+      }
     },
 
     deleteTodo: (state, action) => {
@@ -55,13 +62,7 @@ export const todosSlice = createSlice({
   },
 });
 
-export const {
-  fetchTodo,
-  addTodo,
-  deleteTodo,
-  compledeTodo,
-  updateTodo,
-  updateFilter,
-} = todosSlice.actions;
+export const { addTodo, deleteTodo, compledeTodo, updateTodo, updateFilter } =
+  todosSlice.actions;
 
 export default todosSlice.reducer;
